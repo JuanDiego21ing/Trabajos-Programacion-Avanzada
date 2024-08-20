@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas</title>
+    <style type="text/css">
+      body {
+        background-color: gray;
+      }
+      canvas {
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="800" height="700"></canvas>
+
+    <script type="text/javascript">
+      const myCanvas = document.getElementById("myCanvas");
+      const ctx = myCanvas.getContext("2d");
+
+      ctx.fillStyle = "green";
+      ctx.fillRect(20, 20, 100, 100);
+
+      ctx.fillStyle = "blue";
+      ctx.fillRect(180, 180, 100, 100);
+
+      ctx.fillStyle = "rgba(114, 61, 138, 0.8)";
+      ctx.fillRect(100, 100, 100, 100);
+
+      ctx.strokeStyle = "black";
+      ctx.strokeRect(260, 260, 100, 100);
+
+      ctx.strokeStyle = "green";
+      ctx.lineWidth = 5;
+      ctx.strokeRect(340, 340, 100, 100);
+
+      ctx.beginPath();
+      ctx.moveTo(360 + 50, 140 + 10);
+      ctx.lineTo(210 + 90, 140 + 100);
+      ctx.lineTo(290 + 10, 400 + 90);
+      ctx.closePath();
+
+      ctx.fillStyle = "rgba(117, 187, 253,0.6)";
+      ctx.fill();
+
+      ctx.strokeStyle = "red";
+      ctx.lineWidth = 4;
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(140, 450, 70, 0, 2 * Math.PI);
+      ctx.fillStyle = "purple";
+      ctx.fill();
+
+      ctx.strokeStyle = "black";
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(220, 450, 70, 0, 2 * Math.PI);
+      ctx.strokeStyle = "black";
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(140, 440, 50, 2.5, 0.2 * Math.PI, 1.2 * Math.PI);
+      ctx.fillStyle = "lightgreen";
+      ctx.fill();
+
+      ctx.strokeStyle = "black";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      ctx.font = "50px Cascadia code";
+      ctx.strokeStyle = "blue";
+      ctx.lineWidth = 1;
+      ctx.fillStyle = "cyan";
+      ctx.fillText("Hello World!", 380, 70);
+      ctx.strokeText("Hello World!", 380, 70);
+
+      const img = new Image();
+
+      img.src = "momo.png";
+
+      img.onload = function () {
+        ctx.drawImage(img, 500, 100, 250, 250);
+      };
+
+      const gradient = ctx.createLinearGradient(500, 450, 700, 450);
+
+      gradient.addColorStop(0, "orange");
+      gradient.addColorStop(0.5, "cyan");
+      gradient.addColorStop(1, "purple");
+
+      ctx.fillStyle = gradient;
+      ctx.fillRect(500, 450, 200, 150);
+    </script>
+  </body>
+</html>
