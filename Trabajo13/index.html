@@ -23,15 +23,25 @@
       const circles = []; 
 
       
+      function getRandomColor() {
+        const r = Math.floor(Math.random() * 256);
+        const g = Math.floor(Math.random() * 256);
+        const b = Math.floor(Math.random() * 256);
+        const a = Math.random().toFixed(2);
+        return `rgba(${r}, ${g}, ${b}, ${a})`;
+      }
+
+      let currentColor = getRandomColor(); 
+
+      
       myCanvas.addEventListener("mousedown", function (event) {
         const rect = myCanvas.getBoundingClientRect();
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
-        const radius = 30;
-        const color = "blue";
+        const radius = 60;
 
-       
-        circles.push({ x, y, radius, color });
+        
+        circles.push({ x, y, radius, color: currentColor });
 
         
         drawCircles();
@@ -39,21 +49,15 @@
 
       
       myCanvas.addEventListener("mouseout", function () {
-        if (circles.length > 0) {
-          
-          circles[circles.length - 1].color = "red";
-
-          
-          drawCircles();
-        }
+        currentColor = getRandomColor(); 
       });
 
-      
+     
       function drawCircles() {
-        // Limpiar el canvas
+        
         ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
 
-       
+        
         circles.forEach(circle => {
           ctx.beginPath();
           ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI);
