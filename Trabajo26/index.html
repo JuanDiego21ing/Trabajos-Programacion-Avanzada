@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas</title>
+    <style type="text/css">
+      body {
+        background-color: gray;
+      }
+      canvas {
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="800" height="700"></canvas>
+
+    <script type="text/javascript">
+      const myCanvas = document.getElementById("myCanvas");
+      const ctx = myCanvas.getContext("2d");
+
+      const size = 80;
+      let X = myCanvas.width / 2 - size / 2;
+      let Y = myCanvas.height / 2 - size / 2;
+
+      let speed = 5;
+      let directionX = 0;
+      let directionY = 0;
+
+      function getRandomColor() {
+        const r = Math.floor(Math.random() * 256);
+        const g = Math.floor(Math.random() * 256);
+        const b = Math.floor(Math.random() * 256);
+        const a = Math.random().toFixed(2);
+        return `rgba(${r}, ${g}, ${b}, ${a})`;
+      }
+
+      let color = getRandomColor();
+
+      function square() {
+        ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(X, Y, size, size);
+
+        ctx.fillStyle = color;
+        ctx.fillRect(X, Y, size, size);
+      }
+
+      function Counter() {
+        ctx.font = "20px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText(`Speed: ${speed}`, 10, 30);
+      }
+
+      function movement(event) {
+        console.log(movement);
+        switch (event.key) {
+          case "ArrowLeft":
+            directionX = -1;
+            directionY = 0;
+            break;
+          case "ArrowRight":
+            directionX = 1;
+            directionY = 0;
+            break;
+          case "ArrowUp":
+            directionX = 0;
+            directionY = -1;
+            break;
+          case "ArrowDown":
+            directionX = 0;
+            directionY = 1;
+            break;
+          case " ":
+            speed += 1;
+            break;
+        }
+        color = getRandomColor();
+      }
+
+      function update() {
+        console.log(update);
+        X += directionX * speed;
+        Y += directionY * speed;
+
+        if (X + size < 0) {
+          X = myCanvas.width - size;
+        } else if (X > myCanvas.width) {
+          X = 0;
+        }
+
+        if (Y + size < 0) {
+          Y = myCanvas.height - size;
+        } else if (Y > myCanvas.height) {
+          Y = 0;
+        }
+
+        square();
+        Counter();
+        requestAnimationFrame(update);
+      }
+
+      window.addEventListener("keydown", movement);
+
+      update();
+    </script>
+  </body>
+</html>
