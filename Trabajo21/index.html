@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style type="text/css">
+      body {
+        background-color: gray;
+      }
+      canvas {
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="800" height="700"></canvas>
+
+    <script type="text/javascript">
+      const myCanvas = document.getElementById("myCanvas");
+      const ctx = myCanvas.getContext("2d");
+
+      
+      ctx.beginPath();
+      ctx.arc(350, 150, 70, 0, 2 * Math.PI);
+      ctx.fillStyle = "#FFC9AC";
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(330, 135, 10, 0, 2 * Math.PI);
+      ctx.fillStyle = "black";
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(370, 135, 10, 0, 2 * Math.PI);
+      ctx.fillStyle = "black";
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(350, 165, 30, 0, 1 * Math.PI);
+      ctx.fillStyle = "black";
+      ctx.fill();
+
+      ctx.strokeStyle = "black";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(330, 135, 17, 0, 2 * Math.PI);
+      ctx.stroke();
+
+      ctx.strokeStyle = "black";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(370, 135, 17, 0, 2 * Math.PI);
+      ctx.stroke();
+
+      ctx.fillStyle = "black";
+      ctx.fillRect(347, 135, 5, 3);
+
+      ctx.fillStyle = "#FFC9AC";
+      ctx.fillRect(328, 215, 45, 20);
+
+      ctx.fillStyle = "black";
+      ctx.fillRect(293, 235, 120, 160);
+
+      ctx.fillStyle = "#0056A7";
+      ctx.fillRect(293, 395, 120, 50);
+
+      ctx.fillStyle = "black";
+      ctx.fillRect(293, 400, 15, 8);
+
+      ctx.fillStyle = "black";
+      ctx.fillRect(315, 400, 15, 8);
+
+      ctx.fillStyle = "black";
+      ctx.fillRect(340, 400, 15, 8);
+
+      ctx.fillStyle = "black";
+      ctx.fillRect(365, 400, 15, 8);
+
+      ctx.fillStyle = "black";
+      ctx.fillRect(390, 400, 15, 8);
+
+      ctx.fillStyle = "#777777";
+      ctx.fillRect(340, 397, 20, 15);
+
+      ctx.fillStyle = "#0056A7";
+      ctx.fillRect(363, 445, 50, 120);
+
+      ctx.fillStyle = "#0056A7";
+      ctx.fillRect(293, 445, 50, 120);
+
+      ctx.save();
+      ctx.translate(293 + 25, 445 + 60);
+      let angulo = 45;
+      let radianes = (angulo * Math.PI) / 180;
+      ctx.rotate(radianes);
+      ctx.fillStyle = "black";
+      ctx.fillRect(-209, -173, 35, 70);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(293 + 25, 445 + 60);
+      let angulo1 = 130;
+      let radianes1 = (angulo1 * Math.PI) / 180;
+      ctx.rotate(radianes1);
+      ctx.fillStyle = "black";
+      ctx.fillRect(-267, 33, 35, 70);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(293 + 25, 445 + 60);
+      let angulo2 = 130;
+      let radianes2 = (angulo2 * Math.PI) / 180;
+      ctx.rotate(radianes2);
+      ctx.fillStyle = "#FFC9AC";
+      ctx.fillRect(-266, -37, 30, 70);
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(293 + 25, 445 + 60);
+      let angulo3 = 45;
+      let radianes3 = (angulo3 * Math.PI) / 180;
+      ctx.rotate(radianes3);
+      ctx.fillStyle = "#FFC9AC";
+      ctx.fillRect(-206, -103, 30, 70);
+      ctx.restore();
+
+      ctx.beginPath();
+      ctx.arc(200, 350, 20, 0, 2 * Math.PI);
+      ctx.fillStyle = "#FFC9AC";
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(515, 340, 20, 0, 2 * Math.PI);
+      ctx.fillStyle = "#FFC9AC";
+      ctx.fill();
+
+      ctx.fillStyle = "grey";
+      ctx.fillRect(300, 565, 35, 10);
+
+      ctx.fillStyle = "grey";
+      ctx.fillRect(370, 565, 35, 10);
+
+      ctx.fillStyle = "black";
+      ctx.fillRect(370, 575, 55, 30);
+
+      ctx.fillStyle = "black";
+      ctx.fillRect(280, 575, 55, 30);
+
+      ctx.beginPath();
+      ctx.arc(400, 100, 20, 0, 2 * Math.PI);
+      ctx.fillStyle = "black";
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(380, 95, 20, 0, 2 * Math.PI);
+      ctx.fillStyle = "black";
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(370, 93, 20, 0, 2 * Math.PI);
+      ctx.fillStyle = "black";
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(360, 95, 20, 0, 2 * Math.PI);
+      ctx.fillStyle = "black";
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(345, 90, 20, 0, 2 * Math.PI);
+      ctx.fillStyle = "black";
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(330, 90, 20, 0, 2 * Math.PI);
+      ctx.fillStyle = "black";
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(310, 95, 20, 0, 2 * Math.PI);
+      ctx.fillStyle = "black";
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(290, 110, 20, 0, 2 * Math.PI);
+      ctx.fillStyle = "black";
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(286, 130, 20, 0, 2 * Math.PI);
+      ctx.fillStyle = "black";
+      ctx.fill();
+
+
+    </script>
+  </body>
+</html>
