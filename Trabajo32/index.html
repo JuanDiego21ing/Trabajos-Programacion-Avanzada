@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas</title>
+    <style>
+      body {
+        background-color: gray;
+      }
+      canvas {
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="800" height="700"></canvas>
+    <script>
+      const myCanvas = document.getElementById("myCanvas");
+      const ctx = myCanvas.getContext("2d");
+
+      class Square {
+        constructor(x, y, width, height, speed, color = null) {
+          this.x = x;
+          this.y = y;
+          this.width = width;
+          this.height = height;
+          this.speed = speed;
+          this.directionX = 0;
+          this.directionY = 0;
+          this.color = color || this.getRandomColor();
+        }
+
+        getRandomColor() {
+          const r = Math.floor(Math.random() * 256);
+          const g = Math.floor(Math.random() * 256);
+          const b = Math.floor(Math.random() * 256);
+          const a = Math.random().toFixed(2);
+          return `rgba(${r}, ${g}, ${b}, ${a})`;
+        }
+
+        paint() {
+          ctx.strokeStyle = "black";
+          ctx.lineWidth = 2;
+          ctx.strokeRect(this.x, this.y, this.width, this.height);
+          ctx.fillStyle = this.color;
+          ctx.fillRect(this.x, this.y, this.width, this.height);
+        }
+
+        updatePosition() {
+          this.x =
+            (this.x + this.directionX * this.speed + myCanvas.width) %
+            myCanvas.width;
+          this.y =
+            (this.y + this.directionY * this.speed + myCanvas.height) %
+            myCanvas.height;
+        }
+
+        increaseSpeed() {
+          this.speed += 1;
+        }
+
+        changeDirection(directionX, directionY) {
+          this.directionX = directionX;
+          this.directionY = directionY;
+          this.color = this.getRandomColor();
+        }
+
+        randomPosition() {
+          this.x = Math.random() * (myCanvas.width - this.width);
+          this.y = Math.random() * (myCanvas.height - this.height);
+        }
+
+        displaySpeed() {
+          ctx.font = "20px Arial";
+          ctx.fillStyle = "black";
+          ctx.fillText(`Speed: ${this.speed}`, 10, 30);
+        }
+
+        collision(other) {
+          return (
+            this.x < other.x + other.width &&
+            this.x + this.width > other.x &&
+            this.y < other.y + other.height &&
+            this.y + this.height > other.y
+          );
+        }
+      }
+
+      const player = new Square(
+        myCanvas.width / 2 - 40,
+        myCanvas.height / 2 - 40,
+        80,
+        80,
+        5
+      );
+      const target = new Square(100, 100, 50, 50, 0, "black");
+      const obstacles = [];
+
+      console.log(obstacles);
+      obstacles.push(new Square(200, 450, 350, 40, 0, "grey"));
+      obstacles.push(new Square(200, 100, 350, 40, 0, "grey"));
+      obstacles.push(new Square(450, 300, 350, 40, 0, "grey"));
+
+      function movement(event) {
+        console.log(movement);
+        const key = event.key;
+
+        if (key === "ArrowLeft") {
+          player.changeDirection(-1, 0);
+        } else if (key === "ArrowRight") {
+          player.changeDirection(1, 0);
+        } else if (key === "ArrowUp") {
+          player.changeDirection(0, -1);
+        } else if (key === "ArrowDown") {
+          player.changeDirection(0, 1);
+        } else if (key === " ") {
+          player.increaseSpeed();
+        }
+      }
+
+      function update() {
+        const nextX = player.x + player.directionX * player.speed;
+        const nextY = player.y + player.directionY * player.speed;
+        const tempPlayer = new Square(
+          nextX,
+          nextY,
+          player.width,
+          player.height,
+          player.speed,
+          player.color
+        );
+
+        obstacles.forEach((obs) => {
+          if (tempPlayer.collision(obs)) {
+            player.directionX = 0;
+            player.directionY = 0;
+          }
+        });
+
+        player.updatePosition();
+
+        if (player.collision(target)) {
+          target.randomPosition();
+        }
+
+        ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+        player.paint();
+        player.displaySpeed();
+        target.paint();
+        obstacles.forEach((obs) => obs.paint());
+
+        requestAnimationFrame(update);
+      }
+
+      window.addEventListener("keydown", movement);
+      update();
+    </script>
+  </body>
+</html>
